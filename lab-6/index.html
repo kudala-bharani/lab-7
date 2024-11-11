@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ITC 505 Lab 6 - Holy Grail Layout</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+
+            :root {
+                --primary-color: #4361ee;
+                --secondary-color: #3f37c9;
+                --accent-color: #4cc9f0;
+                --background-color: #f8f9fa;
+                --text-color: #2b2d42;
+                --light-text: #ffffff;
+                --shadow-color: rgba(0, 0, 0, 0.1);
+                --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            }
+
+            body {
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                line-height: 1.4;
+                background-color: var(--background-color);
+                color: var(--text-color);
+            }
+
+            .grid-container {
+                display: grid;
+                grid-template-areas:
+                    "header header header"
+                    "nav main ads"
+                    "footer footer footer";
+                grid-template-columns: 200px 1fr 200px;
+                grid-template-rows: auto 1fr auto;
+                min-height: 100vh;
+                gap: 1rem;
+                padding: 1rem;
+                background-color: var(--background-color);
+            }
+
+            .header {
+                grid-area: header;
+                background: var(--gradient);
+                color: var(--light-text);
+                padding: 1.5rem;
+                text-align: center;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px var(--shadow-color);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .header::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1));
+            }
+
+            .header h1 {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
+                text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            }
+
+            .header p {
+                font-size: 1.1rem;
+                opacity: 0.9;
+            }
+
+            .nav {
+                grid-area: nav;
+                background: white;
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px var(--shadow-color);
+            }
+
+            .main {
+                grid-area: main;
+                background: white;
+                padding: 2rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px var(--shadow-color);
+            }
+
+            .ads {
+                grid-area: ads;
+                background: white;
+                padding: 1rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px var(--shadow-color);
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer {
+                grid-area: footer;
+                background: var(--text-color);
+                color: var(--light-text);
+                padding: 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px var(--shadow-color);
+            }
+
+            /* Navigation Styles */
+            .nav ul {
+                list-style: none;
+            }
+
+            .nav li {
+                margin-bottom: 0.75rem;
+            }
+
+            .nav a {
+                text-decoration: none;
+                color: var(--text-color);
+                display: block;
+                padding: 0.75rem 1rem;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+                background: var(--background-color);
+                font-weight: 500;
+            }
+
+            .nav a:hover {
+                background: var(--gradient);
+                color: var(--light-text);
+                transform: translateX(5px);
+            }
+
+            /* Game Container Styles */
+            .game-container {
+                max-width: 1000px;
+                text-align: center;
+                padding: 2rem;
+                background: var(--background-color);
+                border-radius: 15px;
+                box-shadow: inset 0 2px 4px var(--shadow-color);
+            }
+
+            .input-group {
+                margin: 1.5rem 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .input-group input[type="number"] {
+                width: 350px;
+            }
+
+            .button-group {
+                display: flex;
+                justify-content: center;
+                gap: 1rem;
+                margin-top: 1.5rem;
+            }
+
+            button {
+                background: var(--gradient);
+                color: var(--light-text);
+                border: none;
+                padding: 0.75rem 1.5rem;
+                border-radius: 25px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                font-weight: 600;
+                font-size: 1rem;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                box-shadow: 0 2px 4px var(--shadow-color);
+            }
+
+            button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 4px 8px var(--shadow-color);
+            }
+
+            button:active {
+                transform: translateY(0);
+            }
+
+            input[type="number"] {
+                padding: 0.75rem;
+                border: 2px solid #e0e0e0;
+                border-radius: 25px;
+                text-align: center;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+                box-shadow: inset 0 2px 4px var(--shadow-color);
+            }
+
+            input[type="number"]:focus {
+                outline: none;
+                border-color: var(--accent-color);
+                box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.3);
+            }
+
+            #message {
+                margin: 1rem 0;
+                font-weight: bold;
+                font-size: 1.1rem;
+                padding: 1rem;
+                border-radius: 8px;
+                background: rgba(255, 255, 255, 0.5);
+                transition: all 0.3s ease;
+            }
+
+            #attempts {
+                font-size: 0.9rem;
+                color: #666;
+                margin-top: 1rem;
+            }
+
+            /* Advertisement Styles */
+            .ad-container {
+                width: 100%;
+                text-align: center;
+                padding: 1rem;
+                border-radius: 8px;
+                transition: all 0.3s ease;
+                text-decoration: none;
+                color: var(--text-color);
+            }
+
+            .ad-container img {
+                max-width: 140px;
+                height: auto;
+                border-radius: 8px;
+                margin-bottom: 0.75rem;
+                transition: transform 0.3s ease;
+                box-shadow: 0 2px 4px var(--shadow-color);
+            }
+
+            .ad-container:hover img {
+                transform: scale(1.05);
+            }
+
+            .ad-container p {
+                font-size: 0.9rem;
+                font-weight: 500;
+                color: var(--text-color);
+            }
+
+            /* Footer Content */
+            .footer h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+                color: var(--accent-color);
+            }
+
+            .footer p {
+                margin-bottom: 1rem;
+                line-height: 1.6;
+                opacity: 0.9;
+            }
+
+            /* Animations */
+            @keyframes fadeIn {
+                from { opacity: 0; transform: translateY(20px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .main, .nav, .ads {
+                animation: fadeIn 0.5s ease-out;
+            }
+
+            /* Responsive Design */
+            @media (max-width: 768px) {
+                .grid-container {
+                    grid-template-areas:
+                        "header"
+                        "nav"
+                        "main"
+                        "ads"
+                        "footer";
+                    grid-template-columns: 1fr;
+                    padding: 0.5rem;
+                    gap: 0.5rem;
+                }
+
+                .nav a {
+                    text-align: center;
+                }
+
+                .game-container {
+                    padding: 1rem;
+                }
+
+                .header h1 {
+                    font-size: 1.5rem;
+                }
+
+                .input-group {
+                    flex-direction: column;
+                }
+
+                .input-group input[type="number"] {
+                    width: 100%;
+                    max-width: 200px;
+                }
+
+                .button-group {
+                    flex-direction: column;
+                }
+            }
+
+            /* Custom Scrollbar */
+            ::-webkit-scrollbar {
+                width: 8px;
+            }
+
+            ::-webkit-scrollbar-track {
+                background: var(--background-color);
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background: var(--primary-color);
+                border-radius: 4px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--secondary-color);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="grid-container">
+            <header class="header">
+                <h1>🎮 Number Guessing Game</h1>
+                <p>Can you guess the secret number between 1 and 100?</p>
+            </header>
+
+            <nav class="nav">
+                <ul>
+                    <li><a href="#">🏠 Home</a></li>
+                    <li><a href="#">ℹ️ About</a></li>
+                    <li><a href="#">🎯 Services</a></li>
+                    <li><a href="#">📁 Portfolio</a></li>
+                    <li><a href="#">📧 Contact</a></li>
+                </ul>
+            </nav>
+
+            <main class="main">
+                <div class="game-container">
+                    <div class="input-group">
+                        <input
+                            type="number"
+                            id="guessInput"
+                            min="1"
+                            max="100"
+                            placeholder="Your guess..." />
+                    </div>
+                    <p id="message"></p>
+                    <div class="button-group">
+                        <button onclick="checkGuess()">Make Guess</button>
+                        <button onclick="resetGame()">New Game</button>
+                    </div>
+                    <p id="attempts">Attempts: 0</p>
+                </div>
+            </main>
+
+            <aside class="ads">
+                <a
+                    href="https://a.co/d/eMbI7ny"
+                    target="_blank"
+                    class="ad-container">
+                    <img
+                        src="https://m.media-amazon.com/images/I/61U00t8UymL._AC_SX679_.jpg"
+                        alt="Brain Games Book" />
+                    <p>🧩 Brain Games & Puzzles</p>
+                </a>
+            </aside>
+
+            <footer class="footer">
+                <div>
+                    <h3>📝 Addendum</h3>
+                    <p>
+                        This interactive number guessing game challenges players
+                        to find a random number between 1 and 100. The
+                        implementation uses JavaScript's Math.random() for
+                        number generation and provides dynamic feedback to guide
+                        players toward the correct answer. Key challenges
+                        included creating an intuitive user interface and
+                        implementing proper input validation, which were
+                        addressed through clear visual feedback and robust error
+                        handling.
+                    </p>
+                </div>
+                <p>Last updated: <span id="lastModified"></span></p>
+            </footer>
+        </div>
+
+        <script src="script.js"></script>
+        <script type="text/javascript">
+            var x = document.lastModified;
+            document.getElementById('lastModified').textContent = x;
+        </script>
+    </body>
+</html>
