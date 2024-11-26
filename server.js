@@ -7,8 +7,12 @@ const server = express()
 server.use(express.urlencoded({'extended': true}))
 server.use(logger('dev'))
 
+server.get('/do_a_random', (req, res) => {
+  res.send(`Your number is: ${Math.floor(Math.random() * 100) + 1}`)
+})
+
 // Mad Lib route handler with styled response
-server.post('/index.html', (req, res) => {
+server.post('/ITC505/lab-7/index.html', (req, res) => {
     const { adjective1, noun1, verb1, adverb1, noun2 } = req.body;
     
     // Check if all fields are filled
@@ -62,7 +66,7 @@ server.post('/index.html', (req, res) => {
                 <div class="error-container">
                     <h1>🚨 Oops! Submission Failed</h1>
                     <p>Please fill out ALL fields in your space adventure story!</p>
-                    <a href="/index.html">Go Back to Form</a>
+                    <a href="/ITC505/lab-7/index.html">Go Back to Form</a>
                 </div>
             </body>
             </html>
@@ -147,14 +151,14 @@ server.post('/index.html', (req, res) => {
                         This extraordinary encounter would change their cosmic journey forever!
                     </p>
                 </div>
-                <a href="/index.html" class="action-link">Create Another Space Story 🌠</a>
+                <a href="/ITC505/lab-7/index.html" class="action-link">Create Another Space Story 🌠</a>
             </div>
         </body>
         </html>
     `);
 });
 
-const publicServedFilesPath = __dirname;
+const publicServedFilesPath = path.join(__dirname, 'public')
 server.use(express.static(publicServedFilesPath))
 
 let port = 80
