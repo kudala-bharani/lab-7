@@ -24,7 +24,10 @@ server.post('/index.html', (req, res) => {
                 <style>
                     body {
                         font-family: 'Space Grotesk', sans-serif;
-                        background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+                        background-image: url('https://ideogram.ai/assets/image/lossless/response/D_xPRLScSKCjYxBKm3O-jA');
+                        background-size: cover;
+                        background-position: center;
+                        background-attachment: fixed;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -78,7 +81,10 @@ server.post('/index.html', (req, res) => {
             <style>
                 body {
                     font-family: 'Space Grotesk', sans-serif;
-                    background: linear-gradient(135deg, #e0e7ff 0%, #f3f4f6 100%);
+                    background-image: url('https://ideogram.ai/assets/image/lossless/response/D_xPRLScSKCjYxBKm3O-jA');
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -148,8 +154,7 @@ server.post('/index.html', (req, res) => {
     `);
 });
 
-// Rest of the server configuration remains the same
-const publicServedFilesPath = path.join(__dirname, 'public')
+const publicServedFilesPath = __dirname;
 server.use(express.static(publicServedFilesPath))
 
 let port = 80
