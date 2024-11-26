@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Tale of Gopi and Shar Khan</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>The Tale of Gopi and Shar Khan</h1>
+        <img id="story-image" src="/api/placeholder/800/400" alt="Story Scene">
+        <div id="story-text"></div>
+        <div id="choices"></div>
+        <button id="restart" style="display: none;" onclick="startGame()">Start Again</button>
+    </div>
+
+    <div class="addendum">
+        <h2><center>Addendum</center></h2>
+        <h3>Planning & Design Choices</h3>
+        <ul>
+            <li>Started with a flowchart approach to map out all possible story paths and ensure each decision led to meaningful consequences</li>
+            <li>Chose a nature-inspired color scheme (greens and earth tones) to match the story's setting</li>
+            <li>Designed the layout to be clean and focused, with the story text and choices clearly separated</li>
+        </ul>
+
+        <h3>Technical Implementation</h3>
+        <ul>
+            <li>Used object-oriented data structure for story management, making it easy to modify and extend</li>
+            <li>Implemented responsive design principles to ensure the game works well on all devices</li>
+            <li>Created reusable functions for game state management and scene transitions</li>
+        </ul>
+
+        <h3>Challenges & Solutions</h3>
+        <ul>
+            <li>Challenge: Managing multiple story paths without repetitive code
+                <br>Solution: Implemented a centralized story data object with clear node connections</li>
+            <li>Challenge: Maintaining consistent image sizing across different devices
+                <br>Solution: Used percentage-based dimensions with centered positioning</li>
+            <li>Challenge: Ensuring smooth transitions between scenes
+                <br>Solution: Implemented state management system with clean update functions</li>
+        </ul>
+
+        <h3>Insights Gained</h3>
+        <ul>
+            <li>Learned the importance of proper story structure planning before coding</li>
+            <li>Discovered effective ways to manage complex state in interactive narratives</li>
+            <li>Gained experience in creating engaging user interfaces for storytelling</li>
+        </ul>
+    </div>
+
+    <footer>
+        <p>Last updated: 
+            <span id="lastModified"></span>
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
