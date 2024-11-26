@@ -16,6 +16,7 @@ server.post('/index.html', (req, res) => {
         res.send(`
             <!DOCTYPE html>
             <html lang="en">
+
             <head>
                 <meta charset="UTF-8">
                 <title>Mad Lib Error</title>
